@@ -13,37 +13,37 @@
     </div>
 
     <div class="description-welcome">
-    This app includes a simple administrative backend that you can use to set welcome text on the app's home screen. Visit <a href="{{pathFor 'admin'}}">/admin</a> to log into the backend. The first authenticated user is allowed access.
+    This app includes a simple administrative backend that you can use to set welcome text on the app's home screen. Visit <a href="{{pathFor route='admin'}}">/admin</a> to log into the backend. The first authenticated user is allowed access.
     </div>
   </div>
 
   <div id="container" class="{{menuOpen}} {{overlayOpen}}">
     <section id="menu" class="overthrow">
-      <a href="{{pathFor 'home'}}" class="{{activePage 'home'}}">
+      <a href="{{pathFor route='home'}}" class="{{activePage 'home'}}">
         <span class="wrapper-menu-item">
           <span class="icon-home"></span>
           <span class="title-menu">Home</span>
         </span>
       </a>
-      <a href="{{pathFor 'feed'}}" class="{{activePage 'feed'}}">
+      <a href="{{pathFor route='feed'}}" class="{{activePage 'feed'}}">
         <span class="wrapper-menu-item">
           <span class="icon-rss"></span>
           <span class="title-menu">What's<br>Cooking</span>
         </span>
       </a>
-      <a href="{{pathFor 'recipes'}}" class="{{activePage 'recipes' 'recipe'}}">
+      <a href="{{pathFor route='recipes'}}" class="{{activePage 'recipes' 'recipe'}}">
         <span class="wrapper-menu-item">
           <span class="icon-category"></span>
           <span class="title-menu">Recipes</span>
         </span>
       </a>
-      <a href="{{pathFor 'bookmarks'}}" class="{{activePage 'bookmarks'}}">
+      <a href="{{pathFor route='bookmarks'}}" class="{{activePage 'bookmarks'}}">
         <span class="wrapper-menu-item">
           <span class="icon-bookmark-hollow"></span>
           <span class="title-menu">Bookmarks</span>
         </span>
       </a>
-      <a href="{{pathFor 'about'}}" class="{{activePage 'about'}}">
+      <a href="{{pathFor route='about'}}" class="{{activePage 'about'}}">
         <span class="wrapper-menu-item">
           <span class="icon-question"></span>
           <span class="title-menu">About</span>
