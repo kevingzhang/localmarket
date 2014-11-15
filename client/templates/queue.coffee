@@ -15,7 +15,10 @@ Template.queue.helpers
 Template.queue.events
   'click .openLogin': (e,t) ->
     addMeInData = {
-      
+      cookiePhoneNumber:()->
+        App.Util.getCookie 'phoneNumber'
+      cookieEmail:()->
+        App.Util.getCookie 'email'
       onOk:(phoneNumber, email, partyOfNumber)->
         if !!phoneNumber
           unless App.Util.validatePhoneNumber(phoneNumber)
