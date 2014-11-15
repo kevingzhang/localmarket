@@ -12,12 +12,15 @@
         
     </div>
     {{#each storeQueue}}
-    {{debug}}
-    <div class="{{sessionEqualtoString 'myPositionQeueId' _id 'my-possition' ''}}">
-      <h2 class="list-title"><i class="fa fa-mobile fa-lg"></i> {{displayFakeName}} <i class="fa fa-users"></i> {{partyOf}} </h2>
-      <div class="list-subtitle openLogin">{{waitTime}}  {{status}}</div>
+    
+    <div class="{{sessionEqualtoString 'myPositionQueueId' _id 'my-possition' ''}}">
+      <h2 class="list-title {{sessionEqualtoString 'myPositionQueueId' _id 'my-possition' ''}}"><i class="fa fa-mobile fa-lg"></i> {{displayFakeName}} <i class="fa fa-users"></i> {{partyOf}} </h2>
+      <div class="list-subtitle {{sessionEqualtoString 'myPositionQueueId' _id 'my-possition' ''}} openLogin">{{waitTime}}  {{status}}</div>
     </div>
     {{/each}}
+    {{#unless isInQueue}}
+    <button class='btn btn-primary openLogin'>Add me in</button>
+    {{/unless}}
   </div>
   </div>
 </template>

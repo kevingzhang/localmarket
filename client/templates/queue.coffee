@@ -1,16 +1,17 @@
+Template.queue.rendered = (e,t)->
+  unless (Session.get 'myPositionQueueId')?
+    console.log "in rendered, data is ", @data
+    unless @data.storeInfo? then return
+    Meteor.call 'getMyPositionQueueId', @data.storeInfo._id, App.Util.getCookie('phoneNumber'), App.Util.getCookie('email'), (e,r)->
+      if e?
+        console.log 'getMyPositionQueueId ERROR:', e.message
+      else
+        Session.set 'myPositionQueueId', r
+
+
 Template.queue.helpers
   storeQueue: () ->
-    array = []
-    for i in [1..12]
-      array.push {
-        _id:0
-        displayFakeName : "(XXX)XXX-2288"
-        partyOf: 3
-        waitTime: '2:34'
-
-      }
-    return array
-    # ...
+    queueColl.find storeId:@storeInfo._id
 
 Template.queue.events
   'click .openLogin': (e,t) ->
@@ -39,7 +40,7 @@ Template.queue.events
 
           # ...
         else if !!email
-          Meteor.call 'addMeInByEmail', storeId, email, partyOfNumber, (e,r)->
+          Meteor.call 'addMeInBuyEmail', storeId, email, partyOfNumber, (e,r)->
             if e?
               console.log 'ERROR: Meteor.call addMeInByEmail :' , e.message
               return 
