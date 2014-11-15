@@ -1,0 +1,23 @@
+<template name='queue'>
+  <div class='page home'>
+  {{>nav title="Waiting list" black=true}}
+  <div class='content-scrollable'>
+    <div class="bg-image home">
+        <h1 class="title-home">
+          <img src="img/app/logo-local.svg" alt="Local Market"/>
+          {{storeInfo.name}}
+        </h1>
+        
+        <div>{{storeInfo.property.storeAddress}}</div>
+        
+    </div>
+    {{#each storeQueue}}
+    {{debug}}
+    <div class="{{sessionEqualtoString 'myPositionQeueId' _id 'my-possition' ''}}">
+      <h2 class="list-title"><i class="fa fa-mobile fa-lg"></i> {{displayFakeName}} <i class="fa fa-users"></i> {{partyOf}} </h2>
+      <div class="list-subtitle openLogin">{{waitTime}}  {{status}}</div>
+    </div>
+    {{/each}}
+  </div>
+  </div>
+</template>

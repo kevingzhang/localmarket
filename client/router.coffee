@@ -25,6 +25,21 @@ class @HomeController extends RouteController
     
     @next()
 
+class @QueueController extends RouteController
+  waitOn:()->
+      h1 = Meteor.subscribe 'storeInfo', @params.storeId
+      h2 = Meteor.subscribe 'storeQueue', @params.storeId
+      return [h1,h2]
+
+
+  data:()->
+    storeInfo = storeColl.findOne @params.storeId
+    storeQueue = queueColl.find storeId:@params.storeId
+
+    return {
+            storeInfo : storeInfo
+            storeQueue: storeQueue}
+
 
 class @FeedController extends RouteController
   onBeforeAction: ->
@@ -66,6 +81,9 @@ Router.configure
 Router.route '/',
   name:'home'
 
+Router.route '/queue',
+  name:'queue'
+  
 Router.route '/feed',
   name:'feed'
 

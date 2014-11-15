@@ -1,0 +1,64 @@
+
+
+
+<template name="addMeIn">
+
+  <div class="overlay share">
+
+    <a href="#" class="js-close-overlay overlay-dismiss"><span class="icon-cross"></span></a>
+    <div class="wrapper-new-heading">
+      <div class="title-overlay">
+      
+        <i class='fa fa-mobile'></i>
+        <input type='text' id='addMePhoneNumber' placeholder='(###)###-####' value='{{localSavedPhoneNumber}}'/> 
+      </div>
+      <div class='container'>
+        <button class='col-sm-4 btn btn-default'> 1 </button>
+        <button class='col-sm-4 btn btn-default'> 2 </button>
+        <button class='col-sm-4 btn btn-default'> 3 </button>
+      
+      </div>
+      <hr/>
+      <div class='container'>
+        <button class='col-sm-4 btn btn-default'> 4 </button>
+        <button class='col-sm-4 btn btn-default'> 5 </button>
+        <button class='col-sm-4 btn btn-default'> 6 </button>
+      
+      </div>
+      <hr/>
+      <div class='container'>
+        <button class='col-sm-4 btn btn-default'> 7 </button>
+        <button class='col-sm-4 btn btn-default'> 8 </button>
+        <button class='col-sm-4 btn btn-default'> 9 </button>
+      
+      </div>
+      <hr/>
+      <div class='container'>
+        <button class='col-sm-4 btn btn-default'> <i class="fa fa-caret-left"></i></button>
+        <button class='col-sm-4 btn btn-default'> 0 </button>
+        <button class='col-sm-4 btn btn-default'> <i class="fa fa-trash"></i> </button>
+      
+      </div>
+   
+      <div class="title-overlay">--- OR ---
+      </div>
+      <div>
+      <i class='fa fa-at'></i>
+        <input type='email' id='addMeEmail' placeholder='yourname@email.com' value='{{localSavedEmail}}'/> 
+      </div>
+      <div class="title-overlay">and Party of
+      </div>
+      <div><input type='text' id='addMePartyOf' placeholder='2'/> persons
+      </div>
+      <div class="subtitle-overlay">
+      </div>
+    </div>
+
+    <div class="wrapper-camera">
+      <a id='addMeButton' class="js-attach-image"><i class='fa fa-plus-circle fa-5x'></i></a>
+      <div class="subtext-camera">Add me to the line</div>
+    </div>
+  
+  </div>
+
+</template>
