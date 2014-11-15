@@ -53,3 +53,5 @@ Template.queue.events
     }
     Overlay.open('addMeIn', addMeInData);
     # ...
+  'click .my-position':(e,t)->
+    Router.go 'feed'

@@ -13,9 +13,9 @@
     </div>
     {{#each storeQueue}}
     
-    <div class="{{sessionEqualtoString 'myPositionQueueId' _id 'my-possition' ''}}">
-      <h2 class="list-title {{sessionEqualtoString 'myPositionQueueId' _id 'my-possition' ''}}"><i class="fa fa-mobile fa-lg"></i> {{displayFakeName}} <i class="fa fa-users"></i> {{partyOf}} </h2>
-      <div class="list-subtitle {{sessionEqualtoString 'myPositionQueueId' _id 'my-possition' ''}} openLogin">{{waitTime}}  {{status}}</div>
+    <div class="queue-in-list {{sessionEqualtoString 'myPositionQueueId' _id 'my-position' ''}}">
+      <h2 class="list-title"><i class="fa fa-mobile fa-lg"></i> {{displayFakeName}} <i class="fa fa-users"></i> {{partyOf}} </h2>
+      <div class="list-subtitle">{{waitTime}}  {{status}}</div>
     </div>
     {{/each}}
     {{#unless isInQueue}}
