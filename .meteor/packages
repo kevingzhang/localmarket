@@ -21,4 +21,5 @@ request
 launch-screen
 coffeescript
 linto:fontawesome
+reactive-var
 

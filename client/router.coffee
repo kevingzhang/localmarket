@@ -81,7 +81,7 @@ Router.configure
 Router.route '/',
   name:'home'
 
-Router.route '/queue',
+Router.route '/:storeId/queue',
   name:'queue'
   
 Router.route '/feed',
