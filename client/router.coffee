@@ -40,6 +40,20 @@ class @QueueController extends RouteController
             storeInfo : storeInfo
             storeQueue: storeQueue}
 
+class @ActionController extends RouteController
+  waitOn:()->
+      h1 = Meteor.subscribe 'storeInfo', @params.storeId
+      h2 = Meteor.subscribe 'storeQueue', @params.storeId
+      return [h1,h2]
+
+
+  data:()->
+    storeInfo = storeColl.findOne @params.storeId
+    storeQueue = queueColl.find storeId:@params.storeId
+
+    return {
+            storeInfo : storeInfo
+            storeQueue: storeQueue}
 
 class @FeedController extends RouteController
   onBeforeAction: ->
