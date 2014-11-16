@@ -54,4 +54,4 @@ Template.queue.events
     Overlay.open('addMeIn', addMeInData);
     # ...
   'click .my-position':(e,t)->
-    Router.go 'feed'
+    Router.go 'action',{storeId:t.data.storeInfo._id}

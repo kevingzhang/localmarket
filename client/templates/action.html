@@ -1,0 +1,18 @@
+
+<template name="action">
+  <div class="page bookmarks">
+    {{> nav title='What do you want to do?' }}
+
+    <div class="content-scrollable">
+      <div class='space-holder'>
+        <span>You are holding position {{positionCount}}</span>
+        <br/>
+        <span>Estimate waiting time is {{estimateWaitingTime}}</span>
+      </div>
+      <button class='btn btn-primary action-button'>Pre-order <br/><small>order while waiting</small></button>
+      <button class='btn btn-default action-button'>Delay <br/><small>postpone to next position</small></button>
+      <button class='btn btn-secondary action-button'>Hold <br/><small>hold your position for 15 minutes</small></button>
+      <button class='btn btn-tertiary action-button'>Cancel<br/><small>give up your position</small></button>
+    </div>
+  </div>
+</template>

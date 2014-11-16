@@ -84,6 +84,9 @@ Router.route '/',
 Router.route '/:storeId/queue',
   name:'queue'
   
+Router.route '/:storeId/action',
+  name:'action'
+
 Router.route '/feed',
   name:'feed'
 
