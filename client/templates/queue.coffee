@@ -54,4 +54,5 @@ Template.queue.events
     Overlay.open('addMeIn', addMeInData);
     # ...
   'click .my-position':(e,t)->
+    Session.set 'canBack', true
     Router.go 'action',{storeId:t.data.storeInfo._id}

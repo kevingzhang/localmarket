@@ -7,6 +7,7 @@ Template.action.helpers
 
 Template.action.events
   'click .pre-order-btn': (e,t) ->
+    Session.set 'canBack', true
     Router.go 'recipes'
     # ...
   'click .cancel-me-btn':(e,t)->
@@ -18,4 +19,7 @@ Template.action.events
         console.log "ERROR:", e.message
       else
         Session.set 'myPositionQueueId', undefined
-      Router.go 'queue', {storeId:t.data.storeInfo._id}
+      Session.set 'canBack', false
+      # nextInitiator = 'back'
+      # history.back()
+      #Router.go 'queue', {storeId:t.data.storeInfo._id}

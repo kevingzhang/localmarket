@@ -14,6 +14,13 @@ Template.nav.helpers({
   // unexpected ways that this can happen (for example oauth, or 
   // hot code push), but we can't rely on going back in such cases.
   back: function () {
-    return this.back && ! history.state.initial;
+    if (Session.get('canBack'))
+      return true;
+    if (history.state !== undefined){
+      return this.back && ! history.state.initial;
+    }
+    else
+      return this.back
+    
   }
 });
