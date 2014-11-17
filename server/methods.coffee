@@ -75,6 +75,21 @@ Meteor.methods
       name:storeName
       property:property
 
+  'kickOff':(qId, storeId)->
+    console.log "kickOff #{qId}, #{storeId}"
+    queueObj = queueColl.findOne qId
+
+    notifyObj = {}
+    notifyObj.name = 'Cancelling...'
+    notifyObj.autoCleanup = 5
+
+    queueColl.update {_id:qId}, {$set:{status:'Notification'}, $push:{notifications:notifyObj}}
+    if notifyObj.autoCleanup >0
+      Meteor.setTimeout ()->
+        console.log "timeout to remove notify #{qId}, #{notifyObj.name}"
+        queueColl.update {_id:qId}, {$set:{status:'userCancelled'}, $pull:{notifications:{name:notifyObj.name}}}
+      , notifyObj.autoCleanup * 1000
+      return 'done'
 
 
   'cancelMe':(qId, storeId, phoneNumber, email)->
@@ -85,17 +100,17 @@ Meteor.methods
 
     if (queueObj.storeId is storeId) and ((queueObj.usePhoneNumber is phoneNumber ) or (queueObj.userEmail is email))
       notifyObj = {}
-      
-      notifyObj.name = 'User Cancelled'
-      notifyObj.autoCleanup = 30
+      notifyObj.name = 'Cancelling...'
+      notifyObj.autoCleanup = 5
 
-      queueColl.update {_id:qId}, {$set:{status:'userCancelled'}, $push:{notifications:notifyObj}}
+      queueColl.update {_id:qId}, {$set:{status:'Notification'}, $push:{notifications:notifyObj}}
       if notifyObj.autoCleanup >0
         Meteor.setTimeout ()->
           console.log "timeout to remove notify #{qId}, #{notifyObj.name}"
-          queueColl.update {_id:qId}, {$pull:{notifications:{name:notifyObj.name}}}
+          queueColl.update {_id:qId}, {$set:{status:'userCancelled'}, $pull:{notifications:{name:notifyObj.name}}}
         , notifyObj.autoCleanup * 1000
         return 'done'
+
     else
       throw new Meteor.Error ('Cannot ID this user is working on his own queue')
 
@@ -227,6 +242,15 @@ Meteor.methods
       return Meteor.call 'removeUserAccessToStore', user._id, storeId, right
     else
       throw new Meteor.Error "Cannot find user by email #{email}"
+
+  doesUserHasRightOfStore:(storeId, role)->
+    console.log "doesUserHasRightOfStore #{storeId}, #{role}"
+    storeObj = storeColl.findOne _id:storeId
+    unless storeObj?.access? then return false 
+    if storeObj.access[role]?.indexOf(Meteor.userId()) > -1
+      return true
+    else
+      return false
 
   getHighestAccessRightToStore:(userId, storeId)->
     storeObj = storeColl.findOne _id:storeId

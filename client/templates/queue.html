@@ -13,14 +13,21 @@
     </div>
     {{#each storeQueue}}
     
-    <div class="queue-in-list {{sessionEqualtoString 'myPositionQueueId' _id 'my-position' ''}}">
+    <div data-qid={{_id}} class="queue-in-list {{sessionEqualtoString 'myPositionQueueId' _id 'my-position' ''}}">
       <h2 class="list-title"><i class="fa fa-mobile fa-lg"></i> {{displayFakeName}} <i class="fa fa-users"></i> {{partyOf}} </h2>
-      <div class="list-subtitle">{{waitTime}}  {{status}}</div>
+      <div class="list-subtitle">
+        <span>{{waitTime}} </span>
+        {{#each notifications}}
+        <span class='flashing-msg'> {{name}} </span>
+        {{else}}
+        <span>{{status}}</span>
+        {{/each}}
+      </div>
     </div>
     {{/each}}
-    {{#unless isInQueue}}
+    {{#if isntInQueue}}
     <button class='btn btn-primary openLogin'>Add me in</button>
-    {{/unless}}
+    {{/if}}
   </div>
   </div>
 </template>

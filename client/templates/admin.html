@@ -4,18 +4,37 @@
     <div class="wrapper-admin">
       {{#if isAdmin}}
         <h1 class="title-admin">Admin</h1>
+        <div>
+          <input id='addStoreInput' type='text' placeholder='Store Name'/><br/>
+          <input id='addStoreAddress' type='text' placeholder='Address'/><br/>
+          <button id='addStoreBtn' class='btn btn-default'>Add store</button>
+        </div>
+        <hr/>
+        <div>
+          <input id='userId' type='text' placeholder='userId'/><br/>
+          <input id='storeId' type='text' placeholder='storeId'/><br/>
+          <select id='right' type='text' placeholder='role'>
+            <option value='staff'>staff</option>
+            <option value='waiter'>waiter</option>
+            <option value='keeper'>keeper</option>
+            <option value='admin'>admin</option>
+          </select><br/>
+          <button id='addUserAccessToStore' class='btn btn-default'>add Access</button>
+          <button id='removeUserAccessToStore' class='btn btn-default'>Remove Access</button>
+        </div>
 
-        <form>
-          <label>Edit the front page news:</label>
-          <textarea name="text" rows="5" placeholder="Show the latest Local Market news on the the frontpage...">{{latestNews.text}}</textarea>
-          <button type="submit" class="btn-primary">Save</button>
-        </form>
+          
+        <button class="btn-primary logout">Logout</button>
       {{else}}
-        <h1 class="title-admin">Forbidden</h1>
+        <h1 class="title-admin">Account management</h1>
+          
         
-        {{#unless currentUser}}
-          <a class="login">Log in with Twitter</a>
-        {{/unless}}
+        {{#if currentUser}}
+          <button class="btn-primary logout">Logout</button>
+        {{else}}
+          <input id='username' placeholder='user name'/><input id='email' placeholder='email used for registration'/><input id='password' placeholder='password'/>
+          <div><a class="login">Login</a> or  <a class='register'>Register</a></div>
+        {{/if}}
       {{/if}}
     </div>
   </div>

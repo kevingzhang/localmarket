@@ -1,4 +1,8 @@
-Template.queue.rendered = (e,t)->
+Template.queue.created = ->
+  @isStaffOrHigher = new ReactiveVar()
+  Session.set('myPositionQueueId', undefined)
+
+Template.queue.rendered = ()->
   unless (Session.get 'myPositionQueueId')?
     console.log "in rendered, data is ", @data
     unless @data.storeInfo? then return
@@ -8,10 +12,25 @@ Template.queue.rendered = (e,t)->
       else
         Session.set 'myPositionQueueId', r
 
+  unless @isStaffOrHigher.get()?
+    t = @
+    Meteor.call 'doesUserHasRightOfStore', @data.storeInfo._id, 'staff', (e,r)->
+      console.log "doesUserHasRightOfStore", r 
+      t.isStaffOrHigher.set(r)
+
+
 
 Template.queue.helpers
   storeQueue: () ->
     queueColl.find storeId:@storeInfo._id
+
+  waitTime:()->
+    nowTime = Session.get('nowTime')
+    moment.duration(nowTime - @inTime).humanize()
+
+  isntInQueue:()->
+    Session.get('myPositionQueueId') isnt true
+
 
 Template.queue.events
   'click .openLogin': (e,t) ->
@@ -56,3 +75,14 @@ Template.queue.events
   'click .my-position':(e,t)->
     Session.set 'canBack', true
     Router.go 'action',{storeId:t.data.storeInfo._id}
+
+  'click .queue-in-list':(e,t)->
+    if t.isStaffOrHigher?.get()
+      qid = e.currentTarget.getAttribute 'data-qid'
+      return unless qid?
+      Session.set 'canBack', true
+      Router.go 'adminaction',{storeId:t.data.storeInfo._id, qid:qid}
+
+
+
+

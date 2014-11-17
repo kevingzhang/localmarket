@@ -12,8 +12,8 @@ Meteor.publish 'storeQueue', (storeId)->
 
       return queueColl.find 
         storeId:storeId
-        status:{$exists:true}
+        status:{$exists:true, $ne:'userCancelled'}
 
   #regular user
 
-  return queueColl.find {storeId:storeId, status:{$exists:true, $ne:'userCancelled'}}
+  return queueColl.find {storeId:storeId, status:{$exists:true, $ne:'userCancelled'}}, {fields:{displayFakeName:1, inTime:1, partyOf:1, status:1, notifications:1, storeId:1}}

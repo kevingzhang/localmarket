@@ -1,0 +1,18 @@
+
+<template name="adminaction">
+  <div class="page bookmarks">
+    {{> nav title='Manage queue list?' black=true back=true}}
+
+    <div class="content-scrollable">
+      <div class='space-holder'>
+        <span>You are holding position {{positionCount}}</span>
+        <br/>
+        <span>Estimate waiting time is {{estimateWaitingTime}}</span>
+      </div>
+      
+      <button class='btn btn-default action-button'>Move up <br/><small></small></button>
+      <button class='btn btn-secondary action-button'>Move down <br/><small></small></button>
+      <button class='btn btn-tertiary kickout-me-btn action-button js-back'>Kick off<br/><small></small></button>
+    </div>
+  </div>
+</template>

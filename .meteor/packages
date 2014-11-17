@@ -23,4 +23,6 @@ coffeescript
 linto:fontawesome
 reactive-var
 mrt:moment
+accounts-password
+anticoders:fake
 

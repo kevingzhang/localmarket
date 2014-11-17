@@ -55,6 +55,23 @@ class @ActionController extends RouteController
             storeInfo : storeInfo
             storeQueue: storeQueue}
 
+class @AdminActionController extends RouteController
+  waitOn:()->
+      h1 = Meteor.subscribe 'storeInfo', @params.storeId
+      h2 = Meteor.subscribe 'storeQueue', @params.storeId
+      return [h1,h2]
+
+
+  data:()->
+    storeInfo = storeColl.findOne @params.storeId
+    storeQueue = queueColl.find storeId:@params.storeId
+
+    return {
+            storeInfo : storeInfo
+            storeQueue: storeQueue
+            qid:@params.qid
+          }
+
 class @FeedController extends RouteController
   onBeforeAction: ->
     @feedSubscription = feedSubscription
@@ -100,6 +117,10 @@ Router.route '/:storeId/queue',
   
 Router.route '/:storeId/action',
   name:'action'
+
+Router.route '/:storeId/qman/:qid',
+  name:'adminaction'
+  controller:'AdminActionController'
 
 Router.route '/feed',
   name:'feed'
